@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="css/mui.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="css/common.css"/>
+	<link rel="stylesheet" type="text/css" href="css/iconfont.css"/>
+	<link rel="stylesheet" type="text/css" href="css/drivinglicense.css"/>
+</head>
+
+<body>
+	<div class="container">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">驾驶证查询</h1>
+		</header>
+		<section>
+			<div class="tips">
+				清分日期为每年的领证日期，而不是1月1日哦~
+			</div>
+			<ul id="dringlist" class="mui-table-view"></ul>
+		</section>
+		<div class="add-detail iconfont icon-iconfontadd" id="add-detail">
+		</div>
+	</div>
+</body>
+<script src="js/flexible.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/mui.js"></script>
+<script type="text/javascript">
+mui.init()
+mui.plusReady(function () {
+	// localStorage.clear()
+	
+	// 跳转至添加页面
+	mui('.container').on('tap','#add-detail',function(){
+		// 跳转到添加页面
+		mui.openWindow({
+			url: 'add_drivinglicense.html',
+			id: 'add_drivinglicense'
+		})
+	})
+	
+	// 点击数据进入详情页面
+	mui('#dringlist').on('tap','li',function(){
+		var obj = null
+		
+		var list = JSON.parse(localStorage.getItem('drivinglicense'))
+	
+		list.forEach(item=>{
+			if(this.getAttribute('data-id')==item.licensenumber){
+				obj = item
+			}
+		})
+		
+		// 跳转页面
+		mui.openWindow({
+		   url:'detail_drivinglicense.html',
+		   id: 'detail_drivinglicense',
+		   extras:{
+			   data: JSON.stringify(obj)
+		   }
+		})
+	})
+	
+	// 渲染数据
+	if( localStorage.getItem('drivinglicense')){
+		var storageData = JSON.parse(localStorage.getItem('drivinglicense'))
+		
+		mui.each(storageData,function(index,item){
+			document.querySelector('#dringlist').innerHTML += `
+				<li data-id=${item.licensenumber} class="mui-table-view-cell">
+					<div class="mui-slider-right mui-disabled">
+						<a class="mui-btn mui-btn-red">删除</a>
+					</div>
+					<div class="mui-slider-handle">
+						<h3>${item.certificateName}</h3>
+						<div class="detail">
+							<div>档案编号:<span>${item.licensenumber}</span></div>
+							<div>累计扣分:<span class="num">${item.score}</span></div>
+						</div>
+					</div>
+				</li>
+			`
+		})
+	}
+	
+	// 滑动删除操作
+	mui('.mui-table-view').on('tap', '.mui-btn', function(event) {
+		var elem = this;
+		var li = elem.parentNode.parentNode;
+		
+		// 获取当前li的属性值
+		var id = li.getAttribute('data-id')
+		mui.confirm('确认删除该条记录？', function(e) {
+			if (e.index == 0) {
+				var list = JSON.parse(localStorage.getItem('drivinglicense'))
+				for(var i=0;i<list.length;i++){
+					if(list[i].licensenumber == id){
+						list.splice(i,1);
+						localStorage.setItem('drivinglicense',JSON.stringify(list))
+					}
+				}
+				if(list.length<1){
+					localStorage.removeItem('drivinglicense')
+				}
+				li.parentNode.removeChild(li);
+			}
+		});
+	});
+})
+</script>
+</html>

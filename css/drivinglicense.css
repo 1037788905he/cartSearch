@@ -1,0 +1,69 @@
+.contaner{
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	background-color: #fff;
+	overflow: scroll;
+}
+.mui-bar{
+	background-color: #ed582c;
+	
+}
+
+.mui-bar .mui-title,.mui-action-back{
+	color: #fff!important;
+	font-size: 0.426666rem;
+}
+
+html,body {
+    height: 100%;
+    overflow: hidden;
+}
+
+section{
+	flex: 1;
+	margin-top: 1.066666rem;
+	padding-top: 0.266666rem;
+}
+
+.mui-table-view-cell{
+	font-size: 0.426666rem;
+	padding: 0.426666rem 0.4rem;
+}
+
+.tips{
+	font-size: 0.373333rem; 
+	text-align: center;
+	padding: 0.266666rem 0;
+}
+
+.add-detail{
+	position: fixed;
+	bottom: 1.066666rem;
+	right: 1.066666rem;
+	width: 0.8rem;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	font-size: 0.8rem;
+	color: #fff;
+	background-color: #ed582c;
+	z-index: 99;
+	border-radius: 50%;
+	border: 1px solid #fff;
+}
+
+.detail{
+	display: flex;
+	justify-content: space-between;
+	margin-top: 0.133333rem;
+	font-size: 0.426666rem;
+}
+
+.detail h3 {
+	font-size: 0.693333rem;
+}
+.num{
+	color: red;
+	font-weight: 500;
+}

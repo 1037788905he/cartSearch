@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="css/mui.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="css/common.css"/>
+	<link rel="stylesheet" type="text/css" href="css/city-list.css"/>
+	<link rel="stylesheet" type="text/css" href="css/mui.indexedlist.css"/>
+	<style type="text/css">
+		html,
+		body {
+			height: 100%;
+			overflow: hidden;
+		}
+		.mui-bar {
+			-webkit-box-shadow: none;
+			box-shadow: none;
+		}
+		.mui-indexed-list-group{
+			font-size: 0.426666rem;
+		}
+		.mui-table-view-cell{
+			font-size: 0.426666rem;
+		}
+		.mui-table-view{
+			padding-top: 0.533333rem;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">选择城市</h1>
+		</header>
+		<section>
+			<div class="mui-content">
+				<div id='list' class="mui-indexed-list">
+					<div hidden="hidden" class="mui-indexed-list-search mui-input-row mui-search">
+						<input  type="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索机场">
+					</div>
+					<div class="mui-indexed-list-bar">
+						
+					</div>
+					<div class="mui-indexed-list-alert"></div>
+					<div class="mui-indexed-list-inner">
+						<div class="mui-indexed-list-empty-alert"></div>
+						<ul class="mui-table-view">		
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+		</section>
+	</div>
+
+	
+<script src="js/mui.js"></script>
+<script src="js/flexible.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/mui.indexedlist.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	mui.init()
+	mui.plusReady(function () {
+		var arr = ['a','b','c','d','e','f','g','h','i','j','k','l','n','m','o','p','q','r','s','t','u','v','w','x','y','z'];
+		var cityObj = {}
+		// 请求接口： 车辆尾号限行-获取城市接口
+		mui.ajax('https://api.jisuapi.com/vehiclelimit/city',{
+			dataType: 'json',
+			data:{
+				appkey:'15b163096b822dbf'
+			},
+			success: function(data){
+				var result = data.result
+				arr.forEach(item=>{
+					result.forEach(value=>{
+						if(item == value.city[0]){
+							let key = item.toUpperCase()
+							if(!cityObj[key]){
+								cityObj[key] = [
+									value
+								]
+							} else {
+								cityObj[key].push(value)
+							}
+						}
+					})
+				})
+				mui.each(cityObj,(index,item)=>{
+					// 渲染字母列表
+					document.querySelector('.mui-indexed-list-bar').innerHTML +='<a>'+index+'</a>'
+					
+					//渲染城市列表
+					document.querySelector('.mui-table-view').innerHTML +=`
+					<li data-group="${index}" class="mui-table-view-divider mui-indexed-list-group">${index}</li>
+					`
+					item.forEach(value=>{
+						document.querySelector('.mui-table-view').innerHTML +=`
+						<li data-value="AKU" data-tags="AKeSu" class="mui-table-view-cell mui-indexed-list-item">${value.cityname}</li>
+						`
+					})
+				})
+			}
+		}
+		)
+		
+		var header = document.querySelector('header.mui-bar');
+		var list = document.getElementById('list');
+		//calc hieght
+		list.style.height = (document.body.offsetHeight - header.offsetHeight) + 'px';
+		//create
+		window.indexedList = new mui.IndexedList(list);
+		
+		mui('.mui-table-view').on('tap','li',function(){
+			// 获取文本值
+			var cityName = this.innerText;
+			// 获取首页对象
+			var home = plus.webview.getWebviewById('home.html')
+			
+			mui.fire(home,'cityName',{
+				cityName
+			})
+			
+			// 返回上一页
+			mui.back()
+			
+		})
+	
+	})
+</script>
+</body>
+
+</html>

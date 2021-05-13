@@ -1,0 +1,39 @@
+.contaner{
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	background-color: #fff;
+	overflow: scroll;
+}
+.mui-bar{
+	background-color: #ed582c;
+	
+}
+
+.mui-bar .mui-title,.mui-action-back{
+	color: #fff!important;
+	font-size: 0.426666rem;
+}
+
+html,body {
+    height: 100%;
+    overflow: hidden;
+}
+.mui-bar {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+section{
+	flex: 1;
+	margin-top: 1.066666rem;
+}
+
+.mui-indexed-list-bar{
+	display: flex;
+	flex-direction: column;
+}
+.mui-indexed-list-bar a {
+	flex: 1;
+}

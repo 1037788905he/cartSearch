@@ -1,0 +1,71 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 2533366 */
+  src: url('../fonts/iconfont.woff2?t=1620490218509') format('woff2'),
+       url('../fonts/iconfont.woff?t=1620490218509') format('woff'),
+       url('../fonts/iconfont.ttf?t=1620490218509') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-QQ:before {
+  content: "\e65e";
+}
+
+.icon-weixin:before {
+  content: "\e665";
+}
+
+.icon-weibo:before {
+  content: "\e666";
+}
+
+.icon-shezhi:before {
+  content: "\e611";
+}
+
+.icon-credentials:before {
+  content: "\e8a8";
+}
+
+.icon-didian:before {
+  content: "\e65f";
+}
+
+.icon-luxian:before {
+  content: "\e649";
+}
+
+.icon-maimaiche:before {
+  content: "\e638";
+}
+
+.icon-jiayouzhan-01:before {
+  content: "\e640";
+}
+
+.icon-iconfontadd:before {
+  content: "\e61a";
+}
+
+.icon-jiahao:before {
+  content: "\e86a";
+}
+
+.icon-wode2:before {
+  content: "\f018";
+}
+
+.icon-caret-down:before {
+  content: "\eb21";
+}
+
+.icon-index-copy:before {
+  content: "\e622";
+}
+

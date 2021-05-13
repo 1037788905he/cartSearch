@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="css/mui.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="css/common.css"/>
+	<link rel="stylesheet" type="text/css" href="css/add_drivinglicense.css"/>
+</head>
+
+<body>
+	<div class="container">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">添加驾驶证</h1>
+		</header>
+		<section>
+			<form class="mui-input-group">
+			    <div class="mui-input-row">
+			        <label>驾驶证号</label>
+					<input id="certificateNumber" type="text" class="mui-input-clear" placeholder="请输入完整的驾驶证号">
+			    </div>
+			    <div class="mui-input-row">
+			        <label>档案编号</label>
+			    	<input id="serialNumber" type="text" class="mui-input-clear" placeholder="请输入完整的档案编号">
+			    </div>
+				<div class="mui-input-row">
+				    <label>证件姓名</label>
+					<input id="certificateName" type="text" class="mui-input-clear" placeholder="请输入正确的姓名">
+				</div>
+				
+			</form>
+			<div class="search">
+				<button id="starSearch" type="button" class="mui-btn mui-btn-warning">开始查询</button>
+				<p>
+					您所填写的信息仅用于驾驶证查询，我们将严格遵守《个人信息保护声明》，请放心填写
+				</p>
+			</div>
+		</section>
+	</div>
+</body>
+<script src="js/flexible.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/mui.js"></script>
+<script type="text/javascript">
+mui.init()
+mui.plusReady(function () {
+	// 获取驾驶证号
+	var certificateNumber = document.querySelector('#certificateNumber')
+	// 获取档案编号
+	var serialNumber = document.querySelector('#serialNumber')
+	// 获取用户姓名
+	var certificateName = document.querySelector('#certificateName')
+	
+	
+	
+	// 点击开始查询按钮
+   mui('.search').on('tap','#starSearch',function(){
+	   
+	   // 收起键盘
+	   
+	   var ipt = document.querySelectorAll('.mui-input-row input');
+	   for(var i=0;i<ipt.length;i++){
+		   if(!ipt[i].value){
+			   mui.toast(ipt[i].getAttribute('placeholder'))
+			   return false
+		   }
+	   }
+	   mui.ajax('https://api.binstd.com/driverlicense/query',{
+		   dataType: 'json',
+		   data: {
+			   appkey: 'bed64b34c82beae1',
+			   licensenumber: certificateNumber.value,
+			   licenseid: serialNumber.value
+		   },
+		   success: function(data){
+			   if(data.status==0){
+				   var result = data.result;
+				   result['certificateName'] = certificateName.value
+				   
+				   if(!localStorage.getItem('drivinglicense')){
+					   localStorage.setItem('drivinglicense',`[${JSON.stringify(result)}]`)
+				   } else {
+					   var localData = JSON.parse(localStorage.getItem('drivinglicense'));
+					   localData.push(result);
+					   localStorage.setItem('drivinglicense',JSON.stringify(localData))
+				   }
+				   
+				   // 提示信息
+				   mui.toast('添加成功')
+				   //跳转页面
+				   mui.openWindow({
+					   url:'detail_drivinglicense.html',
+					   id: 'detail_drivinglicense',
+					   extras:{
+						   data: JSON.stringify(result)
+					   }
+				   })
+			   }else{
+				   mui.toast(data.msg)
+			   }
+		   }
+	   })
+   })
+})
+</script>
+</html>

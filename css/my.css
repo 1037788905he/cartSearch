@@ -1,0 +1,121 @@
+.container{
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	background-color: #fff;
+	overflow: hidden;
+}
+
+header{
+	width: 100%;
+	height: 3.946666rem;
+	padding-top: 0.266666rem;
+	background-color: #715273;
+}
+
+header .config{
+	padding: 0 0.266666rem;
+}
+
+header .config i {
+	color: #fff;
+	font-size: 0.586666rem;
+}
+
+
+.portrait{
+	margin-top: 0.533333rem;
+	display: flex;
+	color: #fff;
+	padding: 0 0.266666rem;
+}
+.portrait img{
+	width: 1.6rem;
+	height: 1.6rem;
+	border-radius: 50%;
+}
+
+.portrait .login {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 0 0.533333rem;
+	font-size: 0.426666rem;
+}
+.portrait .login div:first-child{
+	padding-bottom: 0.16rem;
+}
+.tel{
+	font-size: 0.32rem;
+	padding: 0.053333rem  0.16rem;
+	background-color: #9e869f;
+	border-radius: 0.32rem;
+}
+
+section{
+	flex: 1;
+	padding: 0.266666rem 0.533333rem;
+}
+section h4{
+	padding-bottom: 0.266666rem;
+}
+section ul {
+	display: flex;
+}
+
+section ul li{
+	display: flex;
+	width: 25%;
+	font-size: 0.426666rem;
+    flex-direction: column;
+	text-align: center;
+}
+.icon{
+	padding: 0.533333rem 0;
+	font-size: 0.8rem;
+}
+
+/* 登录框 */
+.login-main{
+	height: 30%;
+}
+
+.login-warp{
+	height: 100%;
+	padding: 0.4rem;
+	border-radius: 12px 12px 0 0;
+	background-color: #fff;
+}
+
+.login-warp ul {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+.login-warp ul li {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+.login-warp ul li i{
+	font-size: 0.96rem;
+	padding: 16px 0 ;
+}
+.login-warp ul li:nth-child(1) i{
+	color: #09bb07;
+}
+.login-warp ul li:nth-child(2) i{
+	color: #68a5e1;
+}
+.login-warp ul li:nth-child(3) i{
+	color: #e71f19;
+}
+
+.oauth span{
+	font-size: 0.426666rem;
+}

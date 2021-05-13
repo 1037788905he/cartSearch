@@ -1,0 +1,31 @@
+.contaner{
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	background-color: #fff;
+	overflow: scroll;
+}
+.mui-bar{
+	background-color: #ed582c;
+	
+}
+
+.mui-bar .mui-title,.mui-action-back{
+	color: #fff!important;
+	font-size: 0.426666rem;
+}
+
+html,body {
+    height: 100%;
+    overflow: hidden;
+}
+
+section{
+	flex: 1;
+	margin-top: 1.066666rem;
+}
+#mapBox{
+	width: 100%;
+	height: 600px;
+}

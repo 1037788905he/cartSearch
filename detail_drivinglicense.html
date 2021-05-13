@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="css/mui.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="css/common.css"/>
+	<link rel="stylesheet" type="text/css" href="css/detail_drivinglicense.css"/>
+</head>
+
+<body>
+	<div class="container">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">驾驶证详情</h1>
+		</header>
+		<section>
+			<div class="card" id="card"></div>
+			<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<span>姓名</span>
+						<span id="name"></span>
+					</li>
+					<li class="mui-table-view-cell">
+						<span>累计扣分</span>
+						<span id="score" class="num"></span>
+					</li>
+					<li class="mui-table-view-cell">
+						<span>档案编号</span>
+						<span id="num"></span>
+					</li>
+				</ul>
+		</section>
+	</div>
+</body>
+<script src="js/flexible.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/mui.js"></script>
+<script type="text/javascript">
+	mui.init()
+	mui.plusReady(function () {
+	   var self = plus.webview.currentWebview()
+	   var msg = JSON.parse(self.data)
+	   
+	   var name = document.querySelector('#name')
+	   var card = document.querySelector('#card')
+	   var score = document.querySelector('#score')
+	   var num = document.querySelector('#num')
+	   
+	   name.innerHTML = msg.certificateName
+	   card.innerHTML = msg.licensenumber
+	   score.innerHTML = msg.score
+	   num.innerHTML = msg.licenseid
+	})
+</script>
+</html>

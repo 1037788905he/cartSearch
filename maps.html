@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="css/mui.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="css/common.css"/>
+	<style type="text/css">
+		html,body {
+		    height: 100%;
+		    overflow: hidden;
+		}
+		#mapsBox{
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+</head>
+
+<body>
+<div id="mapsBox">
+	
+</div>
+</body>
+<script src="js/flexible.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/mui.js"></script>
+<script type="text/javascript">
+mui.init()
+mui.plusReady(function () {
+	var mapsBox = document.querySelector('#mapsBox')
+	var ptObj = new plus.maps.Map('mapsBox');
+
+	ptObj.setZoom(16)
+	
+	// 显示当前用户的位置
+	ptObj.isShowUserLocation(true)
+	
+	// 获取当前位置
+	
+	var qPoint = ptObj.getCenter()
+	
+	
+	// 获取当前的用户信息
+	ptObj.getUserLocation(function(state,point){
+		console.log(JSON.stringify(point));
+		// 请求高发地数据
+		mui.ajax('https://api.jisuapi.com/illegaladdr/coord',{
+			dataType: 'json',
+			data:{
+				appkey: '15b163096b822dbf',
+				lat: qPoint.latitude,
+				lng: qPoint.longitude,
+				range: 3000,
+				num: 20
+			},
+			success: function(data){
+				// console.log(JSON.stringify(data));
+				var result = data.result;
+				
+				for(var item of result){
+					// console.log(JSON.stringify(item));
+				}
+			}
+		})
+		
+		// 创建Point对象
+		var center = new plus.maps.Point(qPoint.longitude,qPoint.latitude)
+		
+		//设置地图中心点
+		ptObj.setCenter(center)
+		// 设置
+		var markObj = new plus.maps.Marker(center)
+		
+		markObj.setIcon('img/wz.png')
+		
+		// 添加操作
+		 ptObj.addOverlay(markObj)
+	})
+})
+</script>
+</html>

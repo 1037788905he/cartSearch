@@ -1,0 +1,53 @@
+.contaner{
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	background-color: #fff;
+	overflow: scroll;
+}
+.mui-bar{
+	background-color: #ed582c;
+	
+}
+
+.mui-bar .mui-title,.mui-action-back{
+	color: #fff!important;
+	font-size: 0.426666rem;
+}
+
+html,body {
+    height: 100%;
+    overflow: hidden;
+}
+
+section{
+	flex: 1;
+	margin-top: 1.066666rem;
+	padding-top: 0.533333rem;
+}
+
+.card{
+	margin: 0.4rem;
+	padding: 1.6rem 0;
+	text-align: center;
+	font-size: 0.64rem;
+	color: #fff;
+	font-weight: bold;
+	background-color: #ed582c;
+	border-radius: 0.4rem;
+}
+
+.mui-table-view-cell {
+	display: flex;
+	justify-content: space-between;
+}
+
+.mui-table-view-cell span{
+	font-size: 0.426666rem;
+}
+
+.num{
+	color: red;
+	font-size: 0.48rem;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+	<link rel="stylesheet" type="text/css" href="css/common.css"/>
+	<link rel="stylesheet" type="text/css" href="css/iconfont.css"/>
+</head>
+<body>
+	<nav class="mui-bar mui-bar-tab" id="tab-bar">
+		<a class="mui-tab-item mui-active" href="home.html">
+			<span class="mui-icon mui-icon-home"></span>
+			<span class="mui-tab-label">违章查询</span>
+		</a>
+		<a class="mui-tab-item" href="my.html">
+			<span class="mui-icon mui-icon-phone"></span>
+			<span class="mui-tab-label">我的</span>
+		</a>
+	</nav>
+</body>
+<script src="js/flexible.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+		
+		
+      	mui.init();
+		mui.plusReady(function () {
+		  var pages = ['home.html','my.html']	
+		  var styles = {
+		  	top: '0px',
+		  	bottom:'50px'
+		  }
+		  var view = plus.webview.currentWebview()
+		  for(var i=0;i<pages.length;i++){
+		  	var item = plus.webview.create( pages[i], pages[i], styles);
+			view.append(pages[i])
+		  }
+		  plus.webview.show(pages[0])
+		  
+		  mui('#tab-bar').on('tap','a',function(){
+			 var href = this.getAttribute('href');
+			 plus.webview.show(href)
+		  })
+		  
+		})
+		
+		
+    </script>
+</html>
